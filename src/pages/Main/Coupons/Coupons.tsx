@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import CouponTable from "./CouponsTable";
 import DeleteConfirmModal from "./DeleteConfirmModal";
 import CouponModal from "./CouponsModal";
-import type { CouponForm } from "./CouponsModal"; // Import CouponForm type from Modal
+// import type { CouponForm } from "./CouponsModal"; // Import CouponForm type from Modal
 
 type Coupon = {
   _id: string;
@@ -26,15 +26,15 @@ type Coupon = {
   minimumCartValue?: number;
 };
 
-function ensureCouponFormFields(coupon: Coupon): CouponForm {
-  // Guarantee that required fields are present and non-null (with empty arrays fallback)
-  return {
-    ...coupon,
-    categoryIds: coupon.categoryIds ?? [],
-    subCategoryIds: coupon.subCategoryIds ?? [],
-    // All other fields as is
-  };
-}
+// function ensureCouponFormFields(coupon: Coupon): CouponForm {
+//   // Guarantee that required fields are present and non-null (with empty arrays fallback)
+//   return {
+//     ...coupon,
+//     categoryIds: coupon.categoryIds ?? [],
+//     subCategoryIds: coupon.subCategoryIds ?? [],
+//     // All other fields as is
+//   };
+// }
 
 export default function ManageCoupon() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
@@ -239,10 +239,10 @@ export default function ManageCoupon() {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
         editMode={modalEditMode}
-        initialData={
-          // Guarantee required CouponForm fields for type safety
-          modalData ? ensureCouponFormFields(modalData) : undefined
-        }
+        // initialData={
+        //   // Guarantee required CouponForm fields for type safety
+        //   modalData ? ensureCouponFormFields(modalData) : undefined
+        // }
         onSubmit={modalEditMode ? handleUpdate : handleCreate}
         reloadFlag={reload}
       />
@@ -273,8 +273,8 @@ export default function ManageCoupon() {
             });
             setModalOpen(true);
           }}
-          onDeleteCouponRequest={(coupon) => {
-            setDeleteCoupon(coupon);
+          onDeleteCouponRequest={() => {
+            // setDeleteCoupon(coupon);
             setDeleteModalOpen(true);
           }}
         />
